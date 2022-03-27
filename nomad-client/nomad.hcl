@@ -4,11 +4,10 @@ server {
 
 client {
   enabled = true
-  #servers = [
-  #  "192.168.56.11:4647",
-  #  "192.168.56.12:4647",
-  #  "192.168.56.13:4647",
-  #]
+  host_volume "waypoint" {
+    path      = "/home/vagrant/nomad/waypoint_volume"
+    read_only = false
+  }
 }
 
 ui {

@@ -5,8 +5,8 @@ data_dir   = "/opt/consul"
 
 client_addr      = "0.0.0.0"
 #bind_addr        = "0.0.0.0"
-bind_addr        = "{{ GetInterfaceIP `eth1` }}"
-# advertise_addr   = "{{ GetInterfaceIP `eth1` }}"
+bind_addr        = "{{ GetInterfaceIP `enp0s8` }}"
+# advertise_addr   = "{{ GetInterfaceIP `enp0s8` }}"
 bootstrap_expect = 1
 
 ui_config {

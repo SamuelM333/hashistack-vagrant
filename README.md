@@ -1,21 +1,23 @@
-- consul cluster
-- nomad cluster
-- vault cluster
-- infra graph
-- waypoint
-  - build app docker image
-  - deploy locally to docker
-  - deploy to nomad cluster
-  - waypoint install nomad on server
-  - waypoint install docker on user machine
-  - waypoint server connect nomad on user machine
+- [x] consul cluster
+- [x] nomad cluster
+- [x] vault cluster
+- [ ] waypoint
+  - [ ] build app docker image
+  - [ ] deploy locally to docker
+  - [ ] deploy to nomad cluster
+  - [ ] waypoint install docker on user machine
+  - [ ] waypoint install nomad on server
+  - [ ] waypoint server connect nomad on user machine
+- [ ] logging
+- [ ] infra graph
 
-- multi datacenter
-- conect consul dcs over wan
-
-![](./nomad_reference_diagram.png)
+![nomad_reference_diagram](./nomad_reference_diagram.png)
 https://learn.hashicorp.com/tutorials/nomad/production-deployment-guide-vm-with-consul#configure-nomad
 
+---
+- vagrant parallel up
+- multi datacenter
+- connect consul dcs over wan
 
 ---
 https://www.vaultproject.io/docs/internals/architecture

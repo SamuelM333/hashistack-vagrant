@@ -1,6 +1,10 @@
 server {
   enabled          = true
-  bootstrap_expect = 1
+  bootstrap_expect = 3
+}
+
+client {
+  enabled = false
 }
 
 plugin "docker" {
@@ -11,7 +15,7 @@ ui {
   enabled =  true
 
   consul {
-    ui_url = "http://192.168.56.10:8500/ui"
+    ui_url = "http://localhost:8500/ui"
   }
 
   # vault {

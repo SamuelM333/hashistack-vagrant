@@ -11,5 +11,5 @@ client {
 }
 
 ui {
-  enabled =  false
+  enabled = false
 }

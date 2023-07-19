@@ -4,10 +4,10 @@ server {
 
 client {
   enabled = true
-  host_volume "waypoint" {
-    path      = "/home/vagrant/nomad/waypoint_volume"
-    read_only = false
-  }
+  // host_volume "waypoint" {
+  //   path      = "/home/vagrant/nomad/waypoint_volume"
+  //   read_only = false
+  // }
 }
 
 ui {

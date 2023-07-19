@@ -4,11 +4,11 @@ job "factorial" {
   group "api" {
     count = 3
 
-    // network {
-    //   port "http" {
-    //     to = 8080
-    //   }
-    // }
+    network {
+      port "http" {
+        to = 8080
+      }
+    }
 
     service {
       name = "factorial"
@@ -28,7 +28,7 @@ job "factorial" {
 
       config {
         image = "samuelm333/container-factorial:latest"
-        // ports = ["http"]
+        ports = ["http"]
       }
 
       resources {

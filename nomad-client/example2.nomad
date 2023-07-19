@@ -33,7 +33,7 @@ job "factorial" {
       // Maybe it is trying to hit the service from another node, not being able to reach it
       check {
         type     = "http"
-        // port     = "kek"
+        port     = "kek"
         path     = "/"
         interval = "15s"
         timeout  = "2s"

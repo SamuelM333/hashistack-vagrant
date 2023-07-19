@@ -7,14 +7,14 @@ storage "raft" {
 }
 
 listener "tcp" {
-  address     = "192.168.56.30:8200"
+  address     = "10.20.30.60:8200"
   tls_disable = "true"
 }
 
-api_addr = "http://192.168.56.30:8200"
-cluster_addr = "https://192.168.56.30:8201"
+api_addr = "http://10.20.30.60:8200"
+cluster_addr = "https://10.20.30.60:8201"
 ui = true
 
 service_registration "consul" {
-    address = "192.168.56.30:8500"
+    address = "10.20.30.60:8500"
 }

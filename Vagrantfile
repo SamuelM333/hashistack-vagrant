@@ -3,7 +3,6 @@ CLIENT_COUNT = 3
 
 Vagrant.configure("2") do |config|
   config.vm.box = "rockylinux/9"
-  # config.vm.box = "generic/rocky8"
 
   config.vm.provider "libvirt" do |provider|
     provider.memory = "512"
@@ -37,9 +36,8 @@ Vagrant.configure("2") do |config|
       subconfig.vm.hostname = "nomad-client-#{i}"
 
       subconfig.vm.provider "libvirt" do |provider|
-        provider.memory = "1024"
-        # provider.memory = "1536"
         provider.cpus = 2
+        provider.memory = "1024"
       end
 
       subconfig.vm.network :private_network, ip: "10.20.30.#{50 + i}"

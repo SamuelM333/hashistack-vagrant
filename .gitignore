@@ -169,3 +169,4 @@ cython_debug/
 # End of https://www.toptal.com/developers/gitignore/api/python,vagrant
 
 .pdm-python
+vault-server/keys.txt

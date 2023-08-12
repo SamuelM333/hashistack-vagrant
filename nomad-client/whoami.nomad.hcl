@@ -1,11 +1,9 @@
 job "whoami" {
   datacenters = ["dc1"]
 
-  type = "service"
+  type = "system"
 
   group "demo" {
-    count = 3
-
     network {
        port "http" {
          to = 80

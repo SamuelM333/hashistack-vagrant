@@ -1,42 +1,37 @@
-job "demo-webapp" {
+job "whoami" {
   datacenters = ["dc1"]
+
+  type = "service"
 
   group "demo" {
     count = 3
 
     network {
-      port  "http"{
-        to = -1
-      }
+       port "http" {
+         to = 80
+       }
     }
 
     service {
-      name = "demo-webapp"
+      name = "whoami-demo"
       port = "http"
+      provider = "nomad"
 
       tags = [
         "traefik.enable=true",
         "traefik.http.routers.http.rule=Path(`/myapp`)",
       ]
-
-      check {
-        type     = "http"
-        path     = "/"
-        interval = "2s"
-        timeout  = "2s"
-      }
     }
 
     task "server" {
       env {
-        PORT    = "${NOMAD_PORT_http}"
-        NODE_IP = "${NOMAD_IP_http}"
+        WHOAMI_PORT_NUMBER = "${NOMAD_PORT_http}"
       }
 
       driver = "docker"
 
       config {
-        image = "hashicorp/demo-webapp-lb-guide"
+        image = "traefik/whoami"
         ports = ["http"]
       }
     }

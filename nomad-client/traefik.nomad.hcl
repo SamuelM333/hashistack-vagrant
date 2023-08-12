@@ -1,5 +1,4 @@
 job "traefik" {
-  region      = "global"
   datacenters = ["dc1"]
   type        = "service"
 
@@ -7,67 +6,55 @@ job "traefik" {
     count = 1
 
     network {
-      port "http" {
-        static = 8080
+      port  "http"{
+         static = 80
       }
-
-      port "api" {
-        static = 8081
+      port  "admin"{
+         static = 8080
       }
     }
 
     service {
-      name = "traefik"
+      name = "traefik-http"
+      provider = "nomad"
+      port = "admin"
 
-      check {
-        name     = "alive"
-        type     = "tcp"
-        port     = "http"
-        interval = "10s"
-        timeout  = "2s"
-      }
+        check {
+          type     = "tcp"
+          port     = "http"
+          interval = "10s"
+          timeout  = "2s"
+        }
+
+        check {
+          type     = "http"
+          name     = "app_health"
+          path     = "/dashboard"
+          interval = "60s"
+          timeout  = "5s"
+          
+          check_restart {
+            limit = 3
+            grace = "90s"
+            ignore_warnings = false
+          }
+        }
     }
 
-    task "traefik" {
+    task "server" {
       driver = "docker"
-
       config {
-        image        = "traefik:v2.2"
-        network_mode = "host"
-
-        volumes = [
-          "local/traefik.toml:/etc/traefik/traefik.toml",
+        image = "traefik:3.0"
+        // image = "traefik:2.10"
+        ports = ["admin", "http"]
+        args = [
+          "--api.dashboard=true",
+          "--api.insecure=true", ### For Test only, please do not use that in production
+          "--entrypoints.web.address=:${NOMAD_PORT_http}",
+          "--entrypoints.traefik.address=:${NOMAD_PORT_admin}",
+          "--providers.nomad=true",
+          "--providers.nomad.endpoint.address=http://10.20.30.41:4646" ### IP to your nomad server 
         ]
-      }
-
-      template {
-        data = <<EOF
-[entryPoints]
-    [entryPoints.http]
-    address = ":8080"
-    [entryPoints.traefik]
-    address = ":8081"
-
-[api]
-    dashboard = true
-    insecure  = true
-
-# Enable Consul Catalog configuration backend.
-[providers.consulCatalog]
-    prefix           = "traefik"
-    exposedByDefault = false
-
-    [providers.consulCatalog.endpoint]
-      address = "127.0.0.1:8500"
-      scheme  = "http"
-EOF
-
-        destination = "local/traefik.toml"
-      }
-
-      resources {
-        cpu    = 100
-        memory = 128
       }
     }
   }

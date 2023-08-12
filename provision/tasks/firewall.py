@@ -38,6 +38,10 @@ server.shell(
 
         # Traefik
         "firewall-cmd --permanent --add-port=8080/tcp",
+                
+        # Waypoint
+        "firewall-cmd --permanent --add-port=9701/tcp",
+        "firewall-cmd --permanent --add-port=9702/tcp",
     ],
     _sudo=True,
 )

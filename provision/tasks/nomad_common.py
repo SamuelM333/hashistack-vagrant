@@ -1,4 +1,4 @@
-from pyinfra.operations import files, server, systemd
+from pyinfra.operations import files, systemd
 
 systemd.service(
     name="Stop nomad service before configuration",

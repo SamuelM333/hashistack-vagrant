@@ -1,4 +1,4 @@
-from pyinfra.operations import files, server, systemd
+from pyinfra.operations import files, systemd
 
 systemd.service(
     name="Stop consul service before configuration",
@@ -22,19 +22,12 @@ files.put(
     _sudo=True
 )
 
-# server.service(
-#     name="Enable consul service",
-#     service="consul",
-#     enabled=True,
-#     running=True,
-#     _sudo=True
-# )
+systemd.daemon_reload(_sudo=True)
 
 systemd.service(
     name="Enable consul service",
     service="consul",
     running=True,
     enabled=True,
-    restarted=True,
     _sudo=True,
 )

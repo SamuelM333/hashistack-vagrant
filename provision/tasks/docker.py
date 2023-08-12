@@ -8,6 +8,5 @@ systemd.service(
     service="docker",
     running=True,
     enabled=True,
-    restarted=True,
     _sudo=True,
 )

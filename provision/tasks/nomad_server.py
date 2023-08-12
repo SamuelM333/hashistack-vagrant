@@ -1,11 +1,7 @@
-from pyinfra.operations import files, server, systemd
+from pyinfra import local
+from pyinfra.operations import files, systemd
 
-# systemd.service(
-#     name="Stop nomad service before configuration",
-#     service="nomad",
-#     running=False,
-#     _sudo=True,
-# )
+local.include('provision/tasks/nomad_common.py')
 
 files.put(
     name="Put nomad config file",
@@ -14,11 +10,12 @@ files.put(
     _sudo=True
 )
 
+systemd.daemon_reload(_sudo=True)
+
 systemd.service(
     name="Enable nomad service",
     service="nomad",
     running=True,
     enabled=True,
-    restarted=True,
     _sudo=True,
 )

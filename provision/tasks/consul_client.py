@@ -1,11 +1,7 @@
-from pyinfra.operations import files, server, systemd
+from pyinfra import local
+from pyinfra.operations import files, systemd
 
-# systemd.service(
-#     name="Stop consul service before configuration",
-#     service="consul",
-#     running=False,
-#     _sudo=True,
-# )
+local.include('provision/tasks/consul_common.py')
 
 files.put(
     name="Put consul config file",
@@ -14,11 +10,12 @@ files.put(
     _sudo=True
 )
 
+systemd.daemon_reload(_sudo=True)
+
 systemd.service(
     name="Enable consul service",
     service="consul",
     running=True,
     enabled=True,
-    restarted=True,
     _sudo=True,
 )

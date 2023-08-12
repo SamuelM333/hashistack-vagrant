@@ -29,19 +29,10 @@ files.put(
     _sudo=True
 )
 
-# server.service(
-#     name="Enable nomad service",
-#     service="nomad",
-#     enabled=True,
-#     running=True,
-#     _sudo=True
-# )
-
 systemd.service(
     name="Enable nomad service",
     service="nomad",
     running=True,
     enabled=True,
-    restarted=True,
     _sudo=True,
 )

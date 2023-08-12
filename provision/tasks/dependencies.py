@@ -11,8 +11,15 @@ if host.get_fact(LinuxName) in ('Rocky Linux', ):
 
 server.packages(
     name="Install OS dependencies",
-    packages=["nomad", "consul", "vault", "waypoint", "bind-utils", "traceroute", "tcpdump", "net-tools"],
+    packages=[
+        "nomad",
+        "consul",
+        "vault",
+        "waypoint",
+        "bind-utils",
+        "traceroute",
+        "tcpdump",
+        "net-tools"
+    ],
     _sudo=True,
 )
-
-# sudo rm -f /etc/nomad.d/nomad.hcl

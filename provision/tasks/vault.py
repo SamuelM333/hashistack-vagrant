@@ -1,4 +1,4 @@
-from pyinfra.operations import files, server, systemd
+from pyinfra.operations import files, systemd
 
 files.directory(
     name="Create Vault data dir",
@@ -11,13 +11,6 @@ files.directory(
     path="/etc/vault.d",
     present=True,
     _sudo=True
-)
-
-systemd.service(
-    name="Stop vault service before configuration",
-    service="vault",
-    running=False,
-    _sudo=True,
 )
 
 files.put(
@@ -42,19 +35,12 @@ files.put(
     _sudo=True
 )
 
-# server.service(
-#     name="Enable vault service",
-#     service="vault",
-#     enabled=True,
-#     running=True,
-#     _sudo=True
-# )
+systemd.daemon_reload(_sudo=True)
 
 systemd.service(
     name="Enable vault service",
     service="vault",
     running=True,
     enabled=True,
-    restarted=True,
     _sudo=True,
 )

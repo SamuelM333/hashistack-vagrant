@@ -17,7 +17,7 @@ job "whoami" {
 
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.http.rule=Path(`/myapp`)",
+        "traefik.http.routers.http.rule=Path(`/whoami`)",
       ]
     }
 

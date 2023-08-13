@@ -37,7 +37,7 @@ Vagrant.configure("2") do |config|
 
       subconfig.vm.provider "libvirt" do |provider|
         provider.cpus = 2
-        provider.memory = "1024"
+        provider.memory = "2048"
       end
 
       subconfig.vm.network :private_network, ip: "10.20.30.#{50 + i}"

@@ -11,13 +11,14 @@ job "whoami" {
     }
 
     service {
-      name = "whoami-demo"
+      name = "whoami"
       port = "http"
       provider = "nomad"
 
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.http.rule=Path(`/whoami`)",
+        "traefik.http.routers.whoami.entrypoints=web, websecure",
+        "traefik.http.routers.whoami.rule=Host(`whoami.nomad.localhost`)",
       ]
     }
 
@@ -32,6 +33,12 @@ job "whoami" {
         image = "traefik/whoami"
         ports = ["http"]
       }
+
+      resources {
+        cpu    = 10
+        memory = 16
+      }
+
     }
   }
 }
